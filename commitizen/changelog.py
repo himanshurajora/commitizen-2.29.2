@@ -9,7 +9,7 @@
 ## Parse git log
 
 1. get commits between versions
-2. filter commits with the current cz rules
+2. filter commits with the current vz rules
 3. parse commit information
 4. yield tree nodes
 5. format tree nodes

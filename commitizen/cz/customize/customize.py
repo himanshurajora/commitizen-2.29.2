@@ -7,7 +7,7 @@ from typing import Optional
 
 from commitizen import defaults
 from commitizen.config import BaseConfig
-from commitizen.cz.base import BaseCommitizen
+from commitizen.vz.base import BaseCommitizen
 from commitizen.defaults import Questions
 from commitizen.exceptions import MissingCzCustomizeConfigError
 

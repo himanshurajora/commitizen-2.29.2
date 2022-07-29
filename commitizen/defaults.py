@@ -41,18 +41,18 @@ class Settings(TypedDict, total=False):
     customize: CzSettings
 
 
-name: str = "cz_conventional_commits"
+name: str = "vz_conventional_commits"
 config_files: List[str] = [
     "pyproject.toml",
-    ".cz.toml",
-    ".cz.json",
-    "cz.json",
-    ".cz.yaml",
-    "cz.yaml",
+    ".vz.toml",
+    ".vz.json",
+    "vz.json",
+    ".vz.yaml",
+    "vz.yaml",
 ]
 
 DEFAULT_SETTINGS: Settings = {
-    "name": "cz_conventional_commits",
+    "name": "vz_conventional_commits",
     "version": None,
     "version_files": [],
     "tag_format": None,  # example v$version

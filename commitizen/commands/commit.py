@@ -6,7 +6,7 @@ import questionary
 
 from commitizen import factory, git, out
 from commitizen.config import BaseConfig
-from commitizen.cz.exceptions import CzException
+from commitizen.vz.exceptions import CzException
 from commitizen.exceptions import (
     CommitError,
     CustomError,
@@ -26,11 +26,11 @@ class Commit:
             raise NotAGitProjectError()
 
         self.config: BaseConfig = config
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
         self.arguments = arguments
         self.temp_file: str = os.path.join(
             tempfile.gettempdir(),
-            "cz.commit{user}.backup".format(user=os.environ.get("USER", "")),
+            "vz.commit{user}.backup".format(user=os.environ.get("USER", "")),
         )
 
     def read_backup_message(self) -> str:
@@ -44,12 +44,12 @@ class Commit:
 
     def prompt_commit_questions(self) -> str:
         # Prompt user for the commit message
-        cz = self.cz
-        questions = cz.questions()
+        vz = self.vz
+        questions = vz.questions()
         for question in filter(lambda q: q["type"] == "list", questions):
             question["use_shortcuts"] = self.config.settings["use_shortcuts"]
         try:
-            answers = questionary.prompt(questions, style=cz.style)
+            answers = questionary.prompt(questions, style=vz.style)
         except ValueError as err:
             root_err = err.__context__
             if isinstance(root_err, CzException):
@@ -58,7 +58,7 @@ class Commit:
 
         if not answers:
             raise NoAnswersError()
-        return cz.message(answers)
+        return vz.message(answers)
 
     def __call__(self):
         dry_run: bool = self.arguments.get("dry_run")

@@ -2,8 +2,8 @@ import os
 import re
 
 from commitizen import defaults
-from commitizen.cz.base import BaseCommitizen
-from commitizen.cz.utils import multiple_line_breaker, required_validator
+from commitizen.vz.base import BaseCommitizen
+from commitizen.vz.utils import multiple_line_breaker, required_validator
 from commitizen.defaults import Questions
 
 __all__ = ["ConventionalCommitsCz"]

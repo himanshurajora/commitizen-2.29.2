@@ -7,7 +7,7 @@ class Schema:
 
     def __init__(self, config: BaseConfig, *args):
         self.config: BaseConfig = config
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
 
     def __call__(self):
-        out.write(self.cz.schema())
+        out.write(self.vz.schema())

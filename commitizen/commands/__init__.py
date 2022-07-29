@@ -5,7 +5,7 @@ from .commit import Commit
 from .example import Example
 from .info import Info
 from .init import Init
-from .list_cz import ListCz
+from .list_vz import ListCz
 from .schema import Schema
 from .version import Version
 

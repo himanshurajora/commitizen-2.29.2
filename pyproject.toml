@@ -85,8 +85,8 @@ pytest-xdist = "^2.5.0"
 types-chardet = "^5.0.2"
 
 [tool.poetry.scripts]
-cz = "commitizen.cli:main"
-git-cz = "commitizen.cli:main"
+vz = "commitizen.cli:main"
+git-vz = "commitizen.cli:main"
 
 [tool.isort]
 profile = "black"

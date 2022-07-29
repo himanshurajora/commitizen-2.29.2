@@ -33,7 +33,7 @@ class Check:
         self._valid_command_argument()
 
         self.config: BaseConfig = config
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
 
     def _valid_command_argument(self):
         num_exclusive_args_provided = sum(
@@ -46,7 +46,7 @@ class Check:
             raise InvalidCommandArgumentError(
                 (
                     "Only one of --rev-range, --message, and --commit-msg-file is permitted by check command! "
-                    "See 'cz check -h' for more information"
+                    "See 'vz check -h' for more information"
                 )
             )
 
@@ -60,7 +60,7 @@ class Check:
         if not commits:
             raise NoCommitsFoundError(f"No commit found with range: '{self.rev_range}'")
 
-        pattern = self.cz.schema_pattern()
+        pattern = self.vz.schema_pattern()
         ill_formated_commits = [
             commit
             for commit in commits

@@ -77,13 +77,13 @@ brew install commitizen
 Run in your terminal
 
 ```bash
-cz commit
+vz commit
 ```
 
 or the shortcut
 
 ```bash
-cz c
+vz c
 ```
 
 #### Sign off the commit
@@ -91,17 +91,17 @@ cz c
 Run in the terminal
 
 ```bash
-cz commit --signoff
+vz commit --signoff
 ```
 
 or the shortcut
 
 ```bash
-cz commit -s
+vz commit -s
 ```
 
 ### Integrating with Pre-commit
-Commitizen can lint your commit message for you with `cz check`.
+Commitizen can lint your commit message for you with `vz check`.
 You can integrate this in your [pre-commit](https://pre-commit.com/) config with:
 
 ```yaml
@@ -124,8 +124,8 @@ Read more about the `check` command [here](check.md).
 ### Help
 
 ```sh
-$ cz --help
-usage: cz [-h] [--debug] [-n NAME] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
+$ vz --help
+usage: vz [-h] [--debug] [-n NAME] [-nr NO_RAISE] {init,commit,c,ls,example,info,schema,bump,changelog,ch,check,version} ...
 
 Commitizen is a cli tool to generate conventional commits.
 For more information about the topic go to https://conventionalcommits.org/
@@ -133,9 +133,9 @@ For more information about the topic go to https://conventionalcommits.org/
 optional arguments:
   -h, --help            show this help message and exit
   --debug               use debug mode
-  -n NAME, --name NAME  use the given commitizen (default: cz_conventional_commits)
+  -n NAME, --name NAME  use the given commitizen (default: vz_conventional_commits)
   -nr NO_RAISE, --no-raise NO_RAISE
-                        comma separated error codes that won't rise error, e.g: cz -nr 1,2,3 bump. See codes at https://commitizen-
+                        comma separated error codes that won't rise error, e.g: vz -nr 1,2,3 bump. See codes at https://commitizen-
                         tools.github.io/commitizen/exit_codes/
 
 commands:
@@ -144,7 +144,7 @@ commands:
     commit (c)          create new commit
     ls                  show available commitizens
     example             show commit example
-    info                show information about the cz
+    info                show information about the vz
     schema              show commit schema
     bump                bump semantic version based on the git log
     changelog (ch)      generate changelog (note that it will overwrite existing file)
@@ -167,13 +167,13 @@ sudo activate-global-python-argcomplete
 For permanent (but not global) Commitizen activation, use:
 
 ```bash
-register-python-argcomplete cz >> ~/.bashrc
+register-python-argcomplete vz >> ~/.bashrc
 ```
 
 For one-time activation of argcomplete for Commitizen only, use:
 
 ```bash
-eval "$(register-python-argcomplete cz)"
+eval "$(register-python-argcomplete vz)"
 ```
 
 For further information on activation, please visit the [argcomplete website](https://kislyuk.github.io/argcomplete/).

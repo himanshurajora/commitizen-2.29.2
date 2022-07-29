@@ -1,4 +1,4 @@
-from commitizen.cz import exceptions
+from commitizen.vz import exceptions
 
 
 def required_validator(ans, msg=None):

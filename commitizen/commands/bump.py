@@ -46,7 +46,7 @@ class Bump:
                 if arguments[key] is not None
             },
         }
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
         self.changelog = arguments["changelog"] or self.config.settings.get(
             "update_changelog_on_bump"
         )
@@ -74,8 +74,8 @@ class Bump:
         return is_initial
 
     def find_increment(self, commits: List[git.GitCommit]) -> Optional[str]:
-        bump_pattern = self.cz.bump_pattern
-        bump_map = self.cz.bump_map
+        bump_pattern = self.vz.bump_pattern
+        bump_map = self.vz.bump_map
         if not bump_map or not bump_pattern:
             raise NoPatternMapError(
                 f"'{self.config.settings['name']}' rule does not support bump"

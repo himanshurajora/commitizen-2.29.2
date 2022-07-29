@@ -18,11 +18,11 @@ class YAMLConfig(BaseConfig):
             yaml.dump({"commitizen": {}}, json_file)
 
     def _parse_setting(self, data: Union[bytes, str]) -> None:
-        """We expect to have a section in cz.yaml looking like
+        """We expect to have a section in vz.yaml looking like
 
         ```
         commitizen:
-          name: cz_conventional_commits
+          name: vz_conventional_commits
         ```
         """
         doc = yaml.safe_load(data)

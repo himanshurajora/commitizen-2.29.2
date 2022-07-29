@@ -17,7 +17,7 @@ from commitizen.exceptions import (
 
 logger = logging.getLogger(__name__)
 data = {
-    "prog": "cz",
+    "prog": "vz",
     "description": (
         "Commitizen is a cli tool to generate conventional commits.\n"
         "For more information about the topic go to "
@@ -28,13 +28,13 @@ data = {
         {"name": "--debug", "action": "store_true", "help": "use debug mode"},
         {
             "name": ["-n", "--name"],
-            "help": "use the given commitizen (default: cz_conventional_commits)",
+            "help": "use the given commitizen (default: vz_conventional_commits)",
         },
         {
             "name": ["-nr", "--no-raise"],
             "type": str,
             "required": False,
-            "help": "comma separated error codes that won't rise error, e.g: cz -nr 1,2,3 bump. See codes at https://commitizen-tools.github.io/commitizen/exit_codes/",
+            "help": "comma separated error codes that won't rise error, e.g: vz -nr 1,2,3 bump. See codes at https://commitizen-tools.github.io/commitizen/exit_codes/",
         },
     ],
     "subcommands": {
@@ -80,7 +80,7 @@ data = {
             },
             {
                 "name": "info",
-                "help": "show information about the cz",
+                "help": "show information about the vz",
                 "func": commands.Info,
             },
             {"name": "schema", "help": "show commit schema", "func": commands.Schema},
@@ -374,7 +374,7 @@ def main():
     if args.name:
         conf.update({"name": args.name})
     elif not args.name and not conf.path:
-        conf.update({"name": "cz_conventional_commits"})
+        conf.update({"name": "vz_conventional_commits"})
 
     if args.debug:
         logging.getLogger("commitizen").setLevel(logging.DEBUG)

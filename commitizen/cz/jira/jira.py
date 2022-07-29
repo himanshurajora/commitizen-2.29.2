@@ -1,6 +1,6 @@
 import os
 
-from commitizen.cz.base import BaseCommitizen
+from commitizen.vz.base import BaseCommitizen
 from commitizen.defaults import Questions
 
 __all__ = ["JiraSmartCz"]

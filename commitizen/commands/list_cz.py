@@ -1,6 +1,6 @@
 from commitizen import out
 from commitizen.config import BaseConfig
-from commitizen.cz import registry
+from commitizen.vz import registry
 
 
 class ListCz:

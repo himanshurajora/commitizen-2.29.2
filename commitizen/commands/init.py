@@ -7,7 +7,7 @@ from packaging.version import Version
 from commitizen import cmd, factory, out
 from commitizen.__version__ import __version__
 from commitizen.config import BaseConfig, JsonConfig, TomlConfig, YAMLConfig
-from commitizen.cz import registry
+from commitizen.vz import registry
 from commitizen.defaults import config_files
 from commitizen.exceptions import NoAnswersError
 from commitizen.git import get_latest_tag_name, get_tag_names
@@ -16,7 +16,7 @@ from commitizen.git import get_latest_tag_name, get_tag_names
 class Init:
     def __init__(self, config: BaseConfig, *args):
         self.config: BaseConfig = config
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
 
     def __call__(self):
         values_to_add = {}
@@ -43,7 +43,7 @@ class Init:
                 self._install_pre_commit_hook()
 
             out.write("You can bump the version and create changelog running:\n")
-            out.info("cz bump --changelog")
+            out.info("vz bump --changelog")
             out.success("The configuration are all set.")
         else:
             out.line(f"Config file {self.config.path} already exists")
@@ -53,16 +53,16 @@ class Init:
             "Please choose a supported config file: (default: pyproject.toml)",
             choices=config_files,
             default="pyproject.toml",
-            style=self.cz.style,
+            style=self.vz.style,
         ).ask()
         return name
 
     def _ask_name(self) -> str:
         name: str = questionary.select(
-            "Please choose a cz (commit rule): (default: cz_conventional_commits)",
+            "Please choose a vz (commit rule): (default: vz_conventional_commits)",
             choices=list(registry.keys()),
-            default="cz_conventional_commits",
-            style=self.cz.style,
+            default="vz_conventional_commits",
+            style=self.vz.style,
         ).ask()
         return name
 
@@ -73,7 +73,7 @@ class Init:
             return "0.0.1"
 
         is_correct_tag = questionary.confirm(
-            f"Is {latest_tag} the latest tag?", style=self.cz.style, default=False
+            f"Is {latest_tag} the latest tag?", style=self.vz.style, default=False
         ).ask()
         if not is_correct_tag:
             tags = get_tag_names()
@@ -84,7 +84,7 @@ class Init:
             latest_tag = questionary.select(
                 "Please choose the latest tag: ",
                 choices=get_tag_names(),  # type: ignore
-                style=self.cz.style,
+                style=self.vz.style,
             ).ask()
 
             if not latest_tag:
@@ -96,13 +96,13 @@ class Init:
         if latest_tag.startswith("v"):
             tag_format = r"v$version"
             is_correct_format = questionary.confirm(
-                f'Is "{tag_format}" the correct tag format?', style=self.cz.style
+                f'Is "{tag_format}" the correct tag format?', style=self.vz.style
             ).ask()
 
         if not is_correct_format:
             tag_format = questionary.text(
                 'Please enter the correct version format: (default: "$version")',
-                style=self.cz.style,
+                style=self.vz.style,
             ).ask()
 
             if not tag_format:
@@ -111,7 +111,7 @@ class Init:
 
     def _install_pre_commit_hook(self):
         pre_commit_config_filename = ".pre-commit-config.yaml"
-        cz_hook_config = {
+        vz_hook_config = {
             "repo": "https://github.com/commitizen-tools/commitizen",
             "rev": f"v{__version__}",
             "hooks": [{"id": "commitizen"}],
@@ -120,7 +120,7 @@ class Init:
         config_data = {}
         if not os.path.isfile(pre_commit_config_filename):
             # .pre-commit-config does not exist
-            config_data["repos"] = [cz_hook_config]
+            config_data["repos"] = [vz_hook_config]
         else:
             with open(pre_commit_config_filename) as config_file:
                 yaml_data = yaml.safe_load(config_file)
@@ -133,10 +133,10 @@ class Init:
                         out.write("commitizen already in pre-commit config")
                         break
                 else:
-                    config_data["repos"].append(cz_hook_config)
+                    config_data["repos"].append(vz_hook_config)
             else:
                 # .pre-commit-config exists but there's no "repos" key
-                config_data["repos"] = [cz_hook_config]
+                config_data["repos"] = [vz_hook_config]
 
         with open(pre_commit_config_filename, "w") as config_file:
             yaml.safe_dump(config_data, stream=config_file)

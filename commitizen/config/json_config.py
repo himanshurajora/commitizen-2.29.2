@@ -31,12 +31,12 @@ class JsonConfig(BaseConfig):
         return self
 
     def _parse_setting(self, data: Union[bytes, str]) -> None:
-        """We expect to have a section in .cz.json looking like
+        """We expect to have a section in .vz.json looking like
 
         ```
         {
             "commitizen": {
-                "name": "cz_conventional_commits"
+                "name": "vz_conventional_commits"
             }
         }
         ```

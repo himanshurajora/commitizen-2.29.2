@@ -28,7 +28,7 @@ class Changelog:
             raise NotAGitProjectError()
 
         self.config: BaseConfig = config
-        self.cz = factory.commiter_factory(self.config)
+        self.vz = factory.commiter_factory(self.config)
 
         self.start_rev = args.get("start_rev") or self.config.settings.get(
             "changelog_start_rev"
@@ -42,10 +42,10 @@ class Changelog:
         self.dry_run = args["dry_run"]
         self.unreleased_version = args["unreleased_version"]
         self.change_type_map = (
-            self.config.settings.get("change_type_map") or self.cz.change_type_map
+            self.config.settings.get("change_type_map") or self.vz.change_type_map
         )
         self.change_type_order = (
-            self.config.settings.get("change_type_order") or self.cz.change_type_order
+            self.config.settings.get("change_type_order") or self.vz.change_type_order
         )
         self.rev_range = args.get("rev_range")
         self.tag_format = args.get("tag_format") or self.config.settings.get(
@@ -88,7 +88,7 @@ class Changelog:
                 f"or the setting `changelog_file` in {self.config.path}"
             )
 
-        changelog_hook: Optional[Callable] = self.cz.changelog_hook
+        changelog_hook: Optional[Callable] = self.vz.changelog_hook
         with open(self.file_name, "w") as changelog_file:
             partial_changelog: Optional[str] = None
             if self.incremental:
@@ -103,15 +103,15 @@ class Changelog:
             changelog_file.write(changelog_out)
 
     def __call__(self):
-        commit_parser = self.cz.commit_parser
-        changelog_pattern = self.cz.changelog_pattern
+        commit_parser = self.vz.commit_parser
+        changelog_pattern = self.vz.changelog_pattern
         start_rev = self.start_rev
         unreleased_version = self.unreleased_version
         changelog_meta: Dict = {}
         change_type_map: Optional[Dict] = self.change_type_map
         changelog_message_builder_hook: Optional[
             Callable
-        ] = self.cz.changelog_message_builder_hook
+        ] = self.vz.changelog_message_builder_hook
 
         if not changelog_pattern or not commit_parser:
             raise NoPatternMapError(
